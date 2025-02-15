@@ -29,6 +29,7 @@ jobs:
       with:
         node-version: 18
         cache: 'npm'
+        cache-dependency-path: 'example-2/package-lock.json'
 
     - run: npm install  # Changed to new install since lockfile and package.json has different dependencies requirements
     - run: npm test
