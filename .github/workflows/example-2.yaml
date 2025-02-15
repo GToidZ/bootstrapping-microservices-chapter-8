@@ -1,0 +1,34 @@
+name: App CI
+
+on:
+
+  #
+  # Allows deployment to be invoked manually through the GitHub Actions user interface.
+  #
+  workflow_dispatch: 
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./example-2
+    steps:
+
+    - uses: actions/checkout@v4
+      with:
+        repository: 'bootstrapping-microservices-2nd-edition/chapter-8-example-2'
+        ref: 'main'
+        path: './example-2'
+
+
+    # 
+    # Installs Node.js for use in the workflow.
+    #
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - run: npm install  # Changed to new install since lockfile and package.json has different dependencies requirements
+    - run: npm test
